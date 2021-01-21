@@ -22,6 +22,12 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+// write custom middleware to access the user on every response
+app.use((req, res, next) => {
+  res.locals.currentUser = req.user;
+  next();
+});
+
 app.get('/', (req, res) => {
   res.render('index');
 });
