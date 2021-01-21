@@ -34,9 +34,11 @@ passport.use(new LocalStrategy({
     }).then(user => {
         // if there is a user OR the user has a valid password
         if (user && user.validPassword(password)) {
+            console.log(`👻 found the user with email ${user.email}`);
             // cb(null, user)
             cb(null, user);
         } else {
+            console.log('😈 invalid credentials');
             //cb(null, false) no error, false user
             cb(null, false);
         }

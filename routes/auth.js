@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../models');
-
+const passport = require('../config/ppConfig');
 // mounted at /auth
 
 router.get('/signup', (req, res) => {
@@ -43,5 +43,11 @@ router.post('/signup', (req, res) => {
 router.get('/login', (req, res) => {
   res.render('auth/login');
 });
+
+// make passport do the login stuff
+router.post('/login', passport.authenticate('local', {
+  failureRedirect: '/auth/login',
+  successRedirect: '/'
+}));
 
 module.exports = router;
